@@ -10,12 +10,15 @@ public class TwoDoubles {
         String strNum1, strNum2;
         String strNotification = "You just entered: ";
 
+        // Enter first double
         strNum1 = JOptionPane.showInputDialog(null, "Please input the first number: ", "Input the first number", JOptionPane.INFORMATION_MESSAGE);
         strNotification += strNum1 + " and ";
-
+        
+        // Enter second double
         strNum2 = JOptionPane.showInputDialog(null, "Please input the second number: ", "Input the second number", JOptionPane.INFORMATION_MESSAGE);
         strNotification += strNum2;
-
+        
+        // Change string to double type
         double num1 = Double.parseDouble(strNum1);
         double num2 = Double.parseDouble(strNum2);
         double sum, diff, product, quo;
@@ -29,6 +32,7 @@ public class TwoDoubles {
         String strProduct = Double.toString(product);
         String strQuo = Double.toString(quo);
 
+        // Print result
         JOptionPane.showMessageDialog(null, strNotification, "Show two numbers", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(null, "Sum: " + strSum +
                 "\nDifference: " + strDiff +

@@ -12,7 +12,7 @@ public class Equation {
         solveSecondDegreeEquation();
     }
 
-    // Method to solve a first-degree equation with one variable: ax + b = 0 (a ≠ 0)
+    // ax + b = 0 (a != 0)
     public static void solveFirstDegreeEquation() {
         double a = Double.parseDouble(JOptionPane.showInputDialog("Enter coefficient 'a':"));
         double b = Double.parseDouble(JOptionPane.showInputDialog("Enter coefficient 'b':"));
@@ -25,7 +25,6 @@ public class Equation {
         }
     }
 
-    // Method to solve a system of first-degree equations with two variables:
     // a11*x1 + a12*x2 = b1
     // a21*x1 + a22*x2 = b2
     public static void solveLinearSystem() {
@@ -51,20 +50,20 @@ public class Equation {
         }
     }
 
-    // Method to solve a second-degree equation with one variable: ax^2 + bx + c = 0 (a ≠ 0)
+    // ax^2 + bx + c = 0 (a != 0)
     public static void solveSecondDegreeEquation() {
         double a = Double.parseDouble(JOptionPane.showInputDialog("Enter coefficient 'a':"));
         double b = Double.parseDouble(JOptionPane.showInputDialog("Enter coefficient 'b':"));
         double c = Double.parseDouble(JOptionPane.showInputDialog("Enter coefficient 'c':"));
 
-        double discriminant = b * b - 4 * a * c;
+        double delta = b * b - 4 * a * c;
 
         if (a != 0) {
-            if (discriminant > 0) {
-                double x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-                double x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+            if (delta > 0) {
+                double x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                double x2 = (-b - Math.sqrt(delta)) / (2 * a);
                 JOptionPane.showMessageDialog(null, "The solutions are x1 = " + x1 + ", x2 = " + x2);
-            } else if (discriminant == 0) {
+            } else if (delta == 0) {
                 double x = -b / (2 * a);
                 JOptionPane.showMessageDialog(null, "The double root is x = " + x);
             } else {
