@@ -8,6 +8,26 @@ public class DigitalVideoDisc {
 	private int length;
 	private float cost;
 	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setCagetory(String cagetory) {
+		this.cagetory = cagetory;
+	}
+
+	public void setDirectory(String directory) {
+		this.directory = directory;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public void setCost(float cost) {
+		this.cost = cost;
+	}
+
 	// Constructor mặc định
 	public DigitalVideoDisc() {
 		
