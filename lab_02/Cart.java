@@ -56,4 +56,29 @@ public class Cart {
         return totalCost;
     }
     
+    // method add DVDs với tham số là array
+    public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+        for (DigitalVideoDisc disc : dvdList) {
+            addDigitalVideoDisc(disc);
+        }
+        System.out.println("DVDs have been added to the cart.");
+    }
+    
+    // method add một số lượng DVD tùy ý
+    public void addDigitalVideoDisc1(DigitalVideoDisc... dvdList) {
+        for (DigitalVideoDisc disc : dvdList) {
+            addDigitalVideoDisc(disc);
+        }
+        System.out.println("DVDs have been added to the cart.");
+    }
+    
+    // method add số lượng DVD nhất định (2)
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        addDigitalVideoDisc(dvd1);
+        addDigitalVideoDisc(dvd2);
+        System.out.println("DVDs have been added to the cart.");
+    }
+    
+    
+    
 }
