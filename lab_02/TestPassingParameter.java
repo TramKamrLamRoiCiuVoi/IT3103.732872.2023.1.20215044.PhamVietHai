@@ -21,18 +21,18 @@ public class TestPassingParameter {
 	}
 	
 	// swap noi dung cua 2 object (slide)
-//	public static void swap(Object o1, Object o2) {
-//		Object tmp = o1;
-//		o1 = o2;
-//		o2 = tmp;
-//	}
+	public static void swap(Object o1, Object o2) {
+		Object tmp = o1;
+		o1 = o2;
+		o2 = tmp;
+	}
 	
 	// swap dung
-	public static void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-	    String tmpTitle = dvd1.getTitle();
-	    dvd1.setTitle(dvd2.getTitle());
-	    dvd2.setTitle(tmpTitle);
-	}
+//	public static void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+//	    String tmpTitle = dvd1.getTitle();
+//	    dvd1.setTitle(dvd2.getTitle());
+//	    dvd2.setTitle(tmpTitle);
+//	}
 
 	
 	// doi title cua DVD

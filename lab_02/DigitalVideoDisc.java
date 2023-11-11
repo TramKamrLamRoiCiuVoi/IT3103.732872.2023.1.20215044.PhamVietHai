@@ -2,11 +2,14 @@
 package lab_02;
 
 public class DigitalVideoDisc {
+	private static int nbDigitalVideoDiscs = 0;
+	
 	private String title;
 	private String cagetory;
 	private String directory;
 	private int length;
 	private float cost;
+	private int id;
 	
 	public void setTitle(String title) {
 		this.title = title;
@@ -30,11 +33,13 @@ public class DigitalVideoDisc {
 
 	// Constructor mặc định
 	public DigitalVideoDisc() {
-		
+		nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
 	}
 	
 	// Constructor với các thông tin cơ bản của đĩa
 	public DigitalVideoDisc(String title, String cagetory, String directory, int length, float cost) {
+		this();
 		this.title = title;
 		this.cagetory = cagetory;
 		this.directory = directory;
@@ -69,16 +74,22 @@ public class DigitalVideoDisc {
 	
 	// Constructor với chỉ tiêu tiêu đề của đĩa
 	public DigitalVideoDisc(String title) {
-		super();
+		this();
 		this.title = title;
 	}
 	
 	// Constructor với các chỉ tiêu tiêu đề, thể loại và giá tiền của đĩa
 	public DigitalVideoDisc(String string, String string2, float f) {
+		this();
 		this.title = string;
 		this.cagetory = string2;
 		this.cost = f;
 	}
+	
+	// Getter trả về số lượng đĩa đã tạo
+    public static int getNbDigitalVideoDiscs() {
+        return nbDigitalVideoDiscs;
+    }
 	
 
 }
