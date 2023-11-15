@@ -79,6 +79,46 @@ public class Cart {
         System.out.println("DVDs have been added to the cart.");
     }
     
-    
+    // method in chi tiet thong tin dvd trong cart va tong gia tien
+    public void print() {
+        System.out.println("***********************CART***********************");
+        System.out.println("Ordered Items:\n");
+
+        for (int i = 0; i < qtyOrdered; i++) {
+            DigitalVideoDisc disc = itemsOrdered[i];
+            System.out.println((i + 1) + ". DVD - Title: " + disc.getTitle() + " | Category: " + disc.getCagetory() + " | Director: " + disc.getDirectory() + " | Length: " + disc.getLength() + " | Price: " + disc.getCost() + " $");
+        }
+
+        System.out.println("\nTotal cost: " + getTotalCost() + " $\n");
+        System.out.println("***************************************************");
+    }
+
+    // methid tim dvd theo id
+    public void searchById(int id) {
+        for (DigitalVideoDisc disc : itemsOrdered) {
+            if (disc.getId() == id) {
+                System.out.println("DVD found:\n" + ". DVD - Title: " + disc.getTitle() + " | Category: " + disc.getCagetory() + " | Director: " + disc.getDirectory() + " | Length: " + disc.getLength() + " | Price: " + disc.getCost() + " $");
+                return;
+            }
+        }
+        System.out.println("No matching DVD found with ID: " + id);
+    }
+
+    // method tim dvd theo title
+    public void searchByTitle(String title) {
+        System.out.println("Search results for DVDs with title '" + title + "':\n");
+        boolean found = false;
+
+        for (DigitalVideoDisc disc : itemsOrdered) {
+            if (disc.isMatch(title)) {
+                System.out.println("DVD - Title: " + disc.getTitle() + " | Category: " + disc.getCagetory() + " | Director: " + disc.getDirectory() + " | Length: " + disc.getLength() + " | Price: " + disc.getCost() + " $");
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No matching DVDs found with title: " + title);
+        }
+    }
     
 }

@@ -90,6 +90,18 @@ public class DigitalVideoDisc {
     public static int getNbDigitalVideoDiscs() {
         return nbDigitalVideoDiscs;
     }
+    
+    // Getter tra ve id dvd
+	public int getId() {
+		
+		return id;
+	}
+	
+	// method kiem tra dvd
+    public boolean isMatch(String searchTitle) {
+        
+        return this.title.equalsIgnoreCase(searchTitle);
+    }
 	
 
 }
