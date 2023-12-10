@@ -13,16 +13,16 @@ public class StoreTest {
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("DVD3", "Category3", "Director3", 150, 12.99f);
 
         // add dvd
-        store.addDVD(dvd1);
-        store.addDVD(dvd2);
-        store.addDVD(dvd3);
+        store.addMedia(dvd1);
+        store.addMedia(dvd2);
+        store.addMedia(dvd3);
 
         // xem store
         System.out.println("Current state of the store:");
         store.display();
 
         // test method removeDVD
-        store.removeDVD(dvd2);
+        store.removeMedia(dvd2);
 
         // xem store
         System.out.println("Updated state of the store:");

@@ -1,57 +1,61 @@
 // Pham Viet Hai 20215044
 package lab_02;
 
+import java.util.ArrayList;
+
 public class Store {
 
-    private DigitalVideoDisc itemsInStore[];
+    private ArrayList<Media> itemsInStore;
 
+    // Constructor with capacity
     public Store(int capacity) {
-        itemsInStore = new DigitalVideoDisc[capacity];
+        itemsInStore = new ArrayList<>(capacity);
     }
 
-    // Method  add DVD vao store
-    public void addDVD(DigitalVideoDisc dvd) {
-        for (int i = 0; i < itemsInStore.length; i++) {
-            if (itemsInStore[i] == null) {
-                itemsInStore[i] = dvd;
-                System.out.println("DVD added to the store: " + dvd.getTitle());
-                return;
-            }
-        }
-        System.out.println("Failed to add DVD. The store is full.");
+    // Method add Media to store
+    public void addMedia(Media media) {
+        itemsInStore.add(media);
+        System.out.println("Media added to the store: " + media.getTitle());
     }
 
-    // Method xoa DVD trong store
-    public void removeDVD(DigitalVideoDisc dvd) {
-        for (int i = 0; i < itemsInStore.length; i++) {
-            if (itemsInStore[i] == dvd) {
-                itemsInStore[i] = null;
-                System.out.println("DVD removed from the store: " + dvd.getTitle());
-                return;
-            }
+    // Method remove Media from store
+    public void removeMedia(Media media) {
+        if (itemsInStore.remove(media)) {
+            System.out.println("Media removed from the store: " + media.getTitle());
+        } else {
+            System.out.println("Media not found in the store: " + media.getTitle());
         }
-        System.out.println("DVD not found in the store: " + dvd.getTitle());
     }
-    
-    // method xem store
+
+    // Method to display store content
     public void display() {
-        System.out.println("******************** DVDs in the Store ********************");
-        for (int i = 0; i < itemsInStore.length; i++) {
-            if (itemsInStore[i] != null) {
-                System.out.println("DVD " + (i + 1) + ":");
-                System.out.println("  Title: " + itemsInStore[i].getTitle());
-                System.out.println("  Category: " + itemsInStore[i].getCagetory());
-                System.out.println("  Director: " + itemsInStore[i].getDirectory());
-                System.out.println("  Length: " + itemsInStore[i].getLength());
-                System.out.println("  Price: " + itemsInStore[i].getCost() + " $");
-                System.out.println("-------------------------------------------------------");
-            } else {
-                System.out.println("DVD " + (i + 1) + ": Empty slot");
-                System.out.println("-------------------------------------------------------");
-            }
+        System.out.println("******************** Media in the Store ********************");
+        for (int i = 0; i < itemsInStore.size(); i++) {
+            Media media = itemsInStore.get(i);
+            System.out.println("Media " + (i + 1) + ":");
+            System.out.println("  Title: " + media.getTitle());
+            System.out.println("  Category: " + media.getCategory());
+            System.out.println("  Cost: " + media.getCost() + " $");
+            System.out.println("-------------------------------------------------------");
         }
         System.out.println("***********************************************************");
     }
+
+    // Method to search media by title
+ // Method to search media by title
+    public Media searchByTitle(String title) {
+        for (Media media : itemsInStore) {
+            if (media.isMatch(title)) {
+                return media;
+            }
+        }
+
+        System.out.println("No matching media found with title: " + title);
+        return null;
+    }
+
 }
+
+
 
 
