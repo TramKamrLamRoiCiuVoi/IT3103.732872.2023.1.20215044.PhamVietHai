@@ -1,56 +1,81 @@
 //Pham Viet Hai - 20215044
 package lab_02;
 
+import java.util.Objects;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+import aims.exception.*;
+
 public class Track implements Playable {
-    private String title;
-    private int length;
+	
+	private String title;
+	private int length;
+	
+	public Track() {
+		super();
+	}
+	
+	public Track(String title) {
+		this.title = title;
+	}
+	
+	public Track(String title, int length) {
+		this(title);
+		this.length = length;
+	}
 
-    public Track(String title, int length) {
-        this.title = title;
-        this.length = length;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-	@Override
-	public void play() {
-		System.out.println("Playing Track: " + this.getTitle());
-        System.out.println("Track length: " + this.getLength());
-		
+	public int getLength() {
+		return length;
+	}
+	
+	public String getDetails() {
+		return String.format("Title: %s\nLength: %dm.\n", title, length).replaceAll(" null | 0 ", " Unknown ");
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-	    // Check if the object is compared with itself
-	    if (this == obj) {
-	        return true;
-	    }
-
-	    // Check if the object is null or of a different class
-	    if (obj == null || getClass() != obj.getClass()) {
-	        return false;
-	    }
-
-	    // Cast the object to Track
-	    Track otherTrack = (Track) obj;
-
-	    // Check if the titles and lengths are equal
-	    return this.title != null ? this.title.equals(otherTrack.title) : otherTrack.title == null &&
-	           this.length == otherTrack.length;
+	public void play() throws PlayerException {
+		
+		if (length<=0) {
+			throw new PlayerException("ERROR: Track length is non-positive!");
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Playing track: " + this.getTitle() + "\n");
+		sb.append("Track length: " + this.getLength() + "\n");
+		JOptionPane.showMessageDialog(null, sb.toString(), "Play track", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Track other = (Track) obj;
+		return length == other.length && Objects.equals(title, other.title);
+	}
+	
+	public static Track createTrack() {
+		String title;
+		int length;
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Enter track title: ");
+		title = sc.nextLine();
+		
+		System.out.print("Enter track length: ");
+		length = sc.nextInt();
+		
+		return new Track(title, length);
+	}
+	
 }

@@ -1,70 +1,82 @@
 //Pham Viet Hai 20215044
 package lab_02;
 
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+import aims.exception.*;
+
 public class DigitalVideoDisc extends Disc implements Playable {
-	private static int nbDigitalVideoDiscs = 0;
-	
-	private String directory;
-	public void setDirectory(String directory) {
-		this.directory = directory;
-	}
 
-	// Constructor mặc định
 	public DigitalVideoDisc() {
-		nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
+		super();
 	}
 	
-	// Constructor với các thông tin cơ bản của đĩa
-	public DigitalVideoDisc(String title, String category, String directory, int length, float cost) {
-		this();
-		this.title = title;
-		this.category = category;
-		this.directory = directory;
-		this.length = length;
-		this.cost = cost;
-	}
-	
-	// Getter trả về đường dẫn lưu trữ đĩa
-	public String getDirectory() {
-		return directory;
-	}
-	
-	// Constructor với chỉ tiêu tiêu đề của đĩa
 	public DigitalVideoDisc(String title) {
-		this();
-		this.title = title;
+		super(title);
 	}
-	
-	// Constructor với các chỉ tiêu tiêu đề, thể loại và giá tiền của đĩa
-	public DigitalVideoDisc(String string, String string2, float f) {
-		this();
-		this.title = string;
-		this.category = string2;
-		this.cost = f;
-	}
-	
-	// Getter trả về số lượng đĩa đã tạo
-    public static int getNbDigitalVideoDiscs() {
-        return nbDigitalVideoDiscs;
-    }
-    
-    // method kiem tra dvd
-    public boolean isMatch(String searchTitle) {
-        
-        return this.title.equalsIgnoreCase(searchTitle);
-    }
-    
-    // method play
-    public void play() {
-        System.out.println("Playing DVD: " + this.getTitle());
-        System.out.println("DVD length: " + this.getLength());
-    }
-    
-    @Override
-    public String toString() {
-        return "Media - Title: " + title + " | Category: " + category + " | Cost: " + cost + " $";
-    }
-	
 
+	public DigitalVideoDisc(String title, String category, float cost) {
+		super(title, category, cost);
+	}
+
+	public DigitalVideoDisc(String title, String category, String director, float cost) {
+		super(title, category, director, cost);
+	}
+
+	public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
+		super(title, category, director, length, cost);
+	}
+
+	public String getDetails() {
+		return String.format("---DVD---\nTitle: %s\nCategory: %s\nDirector: %s\nLength: %dm.\nCost: %.2f $\n", title,
+				category, director, length, cost).replaceAll(" null | 0 ", " Unknown ");
+	}
+
+	@Override
+	public void play() throws PlayerException {
+
+		if (getLength() <= 0) {
+			throw new PlayerException("ERROR: DVD length is non-positive!");
+		} else {
+			StringBuilder sb = new StringBuilder();
+			sb.append("Playing DVD: " + this.getTitle() + "\n");
+			sb.append("DVD length: " + this.getLength() + "\n");
+			JOptionPane.showMessageDialog(null, sb.toString(), "Play DVD", JOptionPane.INFORMATION_MESSAGE);
+		}
+
+	}
+
+	@Override
+	public String toString() {
+		return String.format("DVD - %s - %s - %s - %dm. : %.2f $", title, category, director, length, cost)
+				.replaceAll(" null | 0 ", " Unknown ");
+	}
+
+	public static DigitalVideoDisc createDVD() {
+		System.out.println("---New DVD---");
+		String title, category, director;
+		int length;
+		float cost;
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print("Enter title: ");
+		title = sc.nextLine();
+
+		System.out.print("Enter category: ");
+		category = sc.nextLine();
+
+		System.out.print("Enter director: ");
+		director = sc.nextLine();
+
+		System.out.print("Enter length: ");
+		length = sc.nextInt();
+
+		System.out.print("Enter cost: ");
+		cost = sc.nextFloat();
+
+		return new DigitalVideoDisc(title, category, director, length, cost);
+	}
 }

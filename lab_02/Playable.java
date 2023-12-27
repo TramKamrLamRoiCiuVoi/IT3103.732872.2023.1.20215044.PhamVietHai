@@ -1,6 +1,8 @@
 //Pham Viet Hai - 20215044
 package lab_02;
 
+import aims.exception.*;
+
 public interface Playable {
-	void play();
+	public void play() throws PlayerException;
 }

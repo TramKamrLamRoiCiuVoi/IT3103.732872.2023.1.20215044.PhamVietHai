@@ -1,72 +1,79 @@
 //Pham Viet Hai - 20215044
 package lab_02;
 
-public abstract class Media implements Comparable<Media> {
+import java.util.Comparator;
+import java.util.Objects;
 
-    
-    protected int id;
-    protected String title;
-    protected String category;
-    protected float cost;
+public abstract class Media {
 
-    public int getId() {
-        return id;
-    }
+	public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost()
+			.thenComparing(new MediaComparatorByTitleCost());
+	public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle()
+			.thenComparing(new MediaComparatorByCostTitle());
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	private static int nbMedia = 0;
+	protected int id;
+	protected String title;
+	protected String category;
+	protected float cost;
 
-    public String getTitle() {
-        return title;
-    }
+	public Media() {
+		super();
+		this.id = ++nbMedia;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public Media(String title) {
+		this();
+		this.title = title;
+	}
 
-    public String getCategory() {
-        return category;
-    }
+	public Media(String title, String category, float cost) {
+		this(title);
+		this.category = category;
+		this.cost = cost;
+	}
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+	public boolean isMatch(String title) {
+		String[] keywords = title.split("\\s+");
+		for (String word : keywords) {
+			if (this.title.toLowerCase().contains(word.toLowerCase()))
+				return true;
+		}
+		return false;
+	}
 
-    public float getCost() {
-        return cost;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setCost(float cost) {
-        this.cost = cost;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public Media() {
-        // TODO Auto-generated constructor stub
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        // Check if the object is compared with itself
-        if (this == obj) {
-            return true;
-        }
+	public String getCategory() {
+		return category;
+	}
 
-        // Check if the object is null or of a different class
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
+	public float getCost() {
+		return cost;
+	}
 
-        // Cast the object to Media
-        Media otherMedia = (Media) obj;
+	abstract public String getDetails();
 
-        // Check if the titles are equal
-        return this.title != null ? this.title.equals(otherMedia.title) : otherMedia.title == null;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Media other = (Media) obj;
+		return Objects.equals(title, other.title);
+	}
 
-    // Method to check if the title of the media matches the given title
-    public boolean isMatch(String searchTitle) {
-        return this.title != null && this.title.equalsIgnoreCase(searchTitle);
-    }
 }
-

@@ -1,61 +1,52 @@
 // Pham Viet Hai 20215044
 package lab_02;
 
+import lab_02.Media;
+
 import java.util.ArrayList;
+
+import aims.exception.*;
 
 public class Store {
 
-    private ArrayList<Media> itemsInStore;
+	private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
-    // Constructor with capacity
-    public Store(int capacity) {
-        itemsInStore = new ArrayList<>(capacity);
-    }
+	public void addMedia(Media media) throws DuplicatedItemException {
+		if (itemsInStore.contains(media)) {
+			throw new DuplicatedItemException("ERROR: Item already exists.");
+		} else {
+			itemsInStore.add(0, media);
+			System.out.println("Added " + media.toString() + " to store.");
+		}
+	}
 
-    // Method add Media to store
-    public void addMedia(Media media) {
-        itemsInStore.add(media);
-        System.out.println("Media added to the store: " + media.getTitle());
-    }
+	public void removeMedia(Media media) {
+		if (itemsInStore.remove(media)) {
+			System.out.println("Removed " + media.toString() + " from store.");
+		} else {
+			System.out.println("Couldn't find this item.");
+		}
+	}
+	
+	public void displayItems() {
+		System.out.println("\n***********************STORE***********************");
+		for (Media m: itemsInStore) {
+			System.out.println(m.toString());
+		}
+		System.out.println("***************************************************");
+	}
+	
+	
+	public Media fetchMedia(String title) {
+		for (Media m : itemsInStore) {
+			if (m.isMatch(title))
+				return m;
+		}
+		return null;
+	}
 
-    // Method remove Media from store
-    public void removeMedia(Media media) {
-        if (itemsInStore.remove(media)) {
-            System.out.println("Media removed from the store: " + media.getTitle());
-        } else {
-            System.out.println("Media not found in the store: " + media.getTitle());
-        }
-    }
-
-    // Method to display store content
-    public void display() {
-        System.out.println("******************** Media in the Store ********************");
-        for (int i = 0; i < itemsInStore.size(); i++) {
-            Media media = itemsInStore.get(i);
-            System.out.println("Media " + (i + 1) + ":");
-            System.out.println("  Title: " + media.getTitle());
-            System.out.println("  Category: " + media.getCategory());
-            System.out.println("  Cost: " + media.getCost() + " $");
-            System.out.println("-------------------------------------------------------");
-        }
-        System.out.println("***********************************************************");
-    }
-
-    // Method to search media by title
- // Method to search media by title
-    public Media searchByTitle(String title) {
-        for (Media media : itemsInStore) {
-            if (media.isMatch(title)) {
-                return media;
-            }
-        }
-
-        System.out.println("No matching media found with title: " + title);
-        return null;
-    }
+	public ArrayList<Media> getItemsInStore() {
+		return itemsInStore;
+	}
 
 }
-
-
-
-
